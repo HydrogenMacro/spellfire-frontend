@@ -7,4 +7,4 @@ const enterGameBtn = document.getElementById("start-screen-play-btn")!;
 enterGameBtn.addEventListener("click", async () => {
     startScreen.remove();
     Game.init();
-})
+});

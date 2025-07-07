@@ -10,8 +10,7 @@ export class Game {
             autoDensity: true,
             antialias: true,
             canvas: document.getElementById("game")! as HTMLCanvasElement,
-            resolution: window.devicePixelRatio
+            resolution: window.devicePixelRatio,
         });
-        
     }
 }

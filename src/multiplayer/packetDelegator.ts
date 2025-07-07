@@ -1,3 +1,1 @@
-function delegatePacket(packet: string) {
-
-}
+function delegatePacket(packet: string) {}

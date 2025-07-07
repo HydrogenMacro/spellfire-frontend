@@ -21,7 +21,7 @@ export async function getTokenFromDiscordSdk() {
         }),
     });
     const access_token = await response.text();
-    console.log("access token:", access_token)
+    console.log("access token:", access_token);
     // Authenticate with Discord client (using the access_token)
     let auth = await discordSdk.commands.authenticate({
         access_token,

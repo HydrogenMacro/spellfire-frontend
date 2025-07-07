@@ -1,5 +1,3 @@
 import { proxy } from "valtio";
 
-export const appState = proxy({
-    
-});
+export const appState = proxy({});

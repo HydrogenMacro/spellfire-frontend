@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
     server: {
@@ -6,6 +6,6 @@ export default defineConfig({
             "spellfire-frontend.hutao.rip",
             "spellfire.online",
             "spellfire.io",
-        ]
-    }
+        ],
+    },
 });

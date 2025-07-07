@@ -1,7 +1,7 @@
 function createClientPacket(packetType: string) {
     return JSON.stringify({
         timestamp: Date.now(),
-    })
+    });
 }
 /*
 {

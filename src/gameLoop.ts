@@ -6,7 +6,6 @@ let tickMs = 1000 / tickRate;
 function gameLoop(timestamp: number) {
     if (timestamp - lastTickTimestamp > tickMs) {
         lastTickTimestamp = timestamp;
-        
     }
     requestAnimationFrame(gameLoop);
 }
