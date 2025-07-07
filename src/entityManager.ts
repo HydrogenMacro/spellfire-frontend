@@ -1,5 +1,5 @@
 export class EntityManager {
-    entities: 
+    //entities: null
     constructor() {
 
     }

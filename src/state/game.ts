@@ -1,8 +1,7 @@
 import { Application } from "pixi.js";
 
-class Game {
-    constructor() {}
-    static async create() {
+export class Game {
+    static async init() {
         const app = new Application();
 
         await app.init({

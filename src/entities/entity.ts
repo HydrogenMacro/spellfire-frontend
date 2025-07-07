@@ -1,10 +1,17 @@
-import type { Point, Rectangle } from "pixi.js";
+import type { Container, Point, Rectangle } from "pixi.js";
 
-class Entity {
+class Entity<State> {
+    id: number;
     position: Point;
     boundingBox: Rectangle;
-    constructor(position: Point) {
+    sprite: Container;
+    constructor(id: number, position: Point, boundingBox: Rectangle, sprite: Container) {
+        this.id = id;
         this.position = position;
+        this.boundingBox = boundingBox;
+        this.sprite = sprite;
     }
-    
+    updateSprite() {
+
+    }
 }

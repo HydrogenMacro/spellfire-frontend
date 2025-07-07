@@ -1,4 +1,10 @@
-import { DiscordSDK } from "@discord/embedded-app-sdk";
+import { getTokenFromDiscordSdk } from "./auth/discordActivities";
+import { Game } from "./state/game";
 
-const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
-await discordSdk.ready();
+const startScreen = document.getElementById("start-screen")!;
+const enterGameBtn = document.getElementById("start-screen-play-btn")!;
+
+enterGameBtn.addEventListener("click", async () => {
+    startScreen.remove();
+    Game.init();
+})
