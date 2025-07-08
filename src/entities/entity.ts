@@ -3,7 +3,7 @@ import type { Container, Point, Rectangle } from "pixi.js";
 type Attributes = {
     doCSP: boolean;
 };
-abstract class Entity {
+export abstract class Entity {
     id: number;
 
     boundingBox: Rectangle;
@@ -20,11 +20,40 @@ abstract class Entity {
         this.sprite = sprite;
     }
     updateSprite();
-    velocity: Vec2;
+    velocity: StatefulCalculation<Vec2>;
     position: Vec2;
-    static attributes: Attributes;
+    rotation: number;
+    //static attributes: Attributes;
 }
 
+export type EasingFunc: (n: number) => number;
+export const easing: { [fn: string]: EasingFunc } = {
+	linear: (n) => n,
+	quadratic: (n) => n * n,
+	sqrt: (n) => Math.sqrt(n)
+};
+
+interface StatefulCalculation<T> {
+	calculate(): T;
+}
+
+class AccelVelocity implements StatefulCalculation<Vec2> {
+	initialVelocity: Vec2;
+	currentAccelTick: number;
+	accelTickDuration: number;
+	targetVelocity: Vec2;
+	easingFunc: EasingFunc;
+	calculate(): Vec2 {
+		let velocityDiffProgress = (this.accelTickDuration - this.currentAccelTick) / this.accelTickDuration;
+		 return add(scale(subtract(this.targetVelocity, this.initialVelocity), velocityDiffProgress), this.targetVelocity)
+	}
+}
+class StaticVelocity implements StatefulCalculation<Vec2>  {
+	velocity: Vec2
+	calculate(): Vec2 {
+		return this.velocity;
+	}
+}
 export type Vec2 = [number, number];
 
 export function vec2(point: { x: number, y: number }): Vec2;
