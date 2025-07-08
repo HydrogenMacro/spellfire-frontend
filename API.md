@@ -16,7 +16,6 @@ EntityType := "rock" | "tree" | "player" | "bush"
 PlayerShootVariation := "primary" | "secondary" /* LMB or RMB */
 PlayerShootMode := "start" | "end"
 PlayerState := {
-    aim_direction: Vec2,
     shoot_state: {
         is_shooting: boolean,
         shoot_mode: PlayerShootMode,
