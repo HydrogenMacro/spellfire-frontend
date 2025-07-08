@@ -1,1 +1,0 @@
-function delegatePacket(packet: string) {}

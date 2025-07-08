@@ -1,32 +1,33 @@
 # API.md
 
+This is only concerning the websockets connection, which is to be hosted at at `./ws`
 ## Common Typedefs used
 
-```
-Vec2 := {
+```ts
+type Vec2 = {
     x: number,
     y: number
 }
-EasingFunc := "linear" | "quadratic" | "sqrt"
-Velocity := { type: static, velocity: Vec2 } 
+type EasingFunc = "linear" | "quadratic" | "sqrt"
+type Velocity = { type: static, velocity: Vec2 }
     | { type: accel, initialVelocity: Vec2, currentAccelTick: number, accelTickDuration: number, targetVelocity: Vec2, easingFunc: EasingFunc }
-Shape := { type: circle, radius: number }
-EntityId := number
-EntityType := "rock" | "tree" | "player" | "bush"
-PlayerShootVariation := "primary" | "secondary" /* LMB or RMB */
-PlayerShootMode := "start" | "end"
-PlayerState := {
+type Shape = { type: circle, radius: number }
+type EntityId = number
+type EntityType = "rock" | "tree" | "player" | "bush"
+type PlayerShootVariation = "primary" | "secondary" /* LMB or RMB */
+type PlayerShootMode = "start" | "end"
+type PlayerState = {
     shoot_state: {
         is_shooting: boolean,
         shoot_mode: PlayerShootMode,
         shoot_variation: PlayerShootVariation
     }
 }
-BushState := {
+type BushState = {
     is_shaking: boolean,
     shake_duration: number, // shake stops at modulo of 5 ticks
 }
-Entity := {
+type Entity = {
     id: EntityId,
     type: string,
     position: Vec2,
@@ -39,39 +40,44 @@ Entity := {
 ```
 
 ## Message Structure
-```
-{
+
+```ts
+type Message = {
     timestamp: number, // UNIX
     packets: Array<Packet>
 }
-```
-
-## Client Packets
-
-```
-{
-   type: enter_game // sent on initial spawn or death respawn
+type Packet = {
+    type: string,
+    data: Record<string, any> /* same as map[string]any */
 }
- 
-PlayerAction := { type: move, direction: Vec2 } 
-    | { type: attack, 
-        mode: "start" | "end", 
+```
+
+## Packets
+They will be in the form of &lt;type>: &lt;data>
+
+### Client Packets
+
+```ts
+enter_game: {}
+
+type PlayerAction = { type: move, movement: Vec2 }
+    | { type: attack,
+        mode: "start" | "end",
         variation: "primary" | "secondary" /* LMB or RMB */ }
-{
-    type: player_action
+
+player_action: {
     action: PlayerAction
 }
 ```
 
 ## Server Packets
-```
-{
-    type: initialize, // sent in respawn to enter_game
+```ts
+initialize: {
     entities: Array<Entity>,
     player_id: EntityId,
 }
-{
-    type: update,
+
+update: {
     entities: Array<Entities> // todo: diffing
 }
 ```
